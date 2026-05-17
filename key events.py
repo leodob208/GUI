@@ -15,7 +15,8 @@ ufo=image2.get_rect()
 ufo.center=(600,600)
 image3=pygame.image.load('71dNtlbI7fL.jpg')
 image3=pygame.transform.scale(image3,(800,800))
-
+font1=pygame.font.SysFont('Arial',40)
+text=font1.render('mision accomplished',True,'grey','black')
 while running:
     for event in pygame .event.get ():
         if event.type==pygame.QUIT :
@@ -30,8 +31,19 @@ while running:
     if keys[pygame.K_DOWN]:
         rocket.y+=5
     screen.blit (image3,(0,0))
+       
+    
+   
     screen.blit(image1,rocket)
     screen.blit(image2,ufo)
+    if ufo.colliderect(rocket):
+        
+        text=font1.render('mision accomplished',True,'grey','black')
+        screen.blit(text,(350,100))  
+        print('collision detected')
+        ufo.center=(1000,1000)
+        rocket.center=(1000,1000)
+   
    
     pygame.display.update()
-pygame.quit()
+pygame.quit()  
