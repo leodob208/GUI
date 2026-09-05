@@ -19,17 +19,21 @@ wizardsprite.center=(700,100)
 sword=pygame.image.load('sword-removebg-preview.png')
 sword=pygame.transform.scale(sword,(100,100))
 swordsprite=sword.get_rect()
-swordsprite.center=(100,600)
+swordsprite.center=(700,600)
 bow=pygame.image.load('bow-removebg-preview.png')
 bow=pygame.transform.scale(bow,(100,100))
 bowsprite=bow.get_rect()
-bowsprite.center=(400,600)
+bowsprite.center=(100,600)
 staff=pygame.image.load('stafff-removebg-preview.png')
 staff=pygame.transform.scale(staff,(100,100))
 staffsprite=staff.get_rect()
-staffsprite.center=(700,600)
+staffsprite.center=(400,600)
 font1=pygame.font.SysFont('Arial',25)
 text1=font1.render('match the following',True,"black")
+font2=pygame.font.SysFont('Arial',25)
+text2=font2.render('result',True,"black")
+
+
 
 
 while running:
@@ -45,5 +49,6 @@ while running:
     screen.blit(bow,bowsprite)
     screen.blit(staff,staffsprite)
     screen.blit(text1,(300,700))
+    screen.blit(text2,(300,750))
     pygame.display.update()
 pygame.quit()
