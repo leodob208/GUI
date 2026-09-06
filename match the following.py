@@ -33,14 +33,114 @@ text1=font1.render('match the following',True,"black")
 font2=pygame.font.SysFont('Arial',25)
 text2=font2.render('result',True,"black")
 
-
-
+ns=False
+nb=False
+nw=False
+aS=False
+ab=False
+aw=False
+ws=False
+wb=False
+ww=False
+line1=False
+line2=False
+line3=False
+ 
 
 while running:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             running=False 
+        if event.type==pygame.MOUSEBUTTONDOWN:
+            if ninjasprite.collidepoint(event.pos) and line1==False:
+                ns=True
+                nw=True
+                nb=True
+                line1=True
+            if archersprite.collidepoint(event.pos) and line2==False:
+                aS=True
+                aw=True
+                ab=True
+                line2=True
+            if wizardsprite.collidepoint(event.pos) and line3==False:
+                ws=True
+                ww=True
+                wb=True
+                line3=True
+        if event.type==pygame.MOUSEBUTTONUP:
+            if swordsprite.collidepoint(event.pos) and line1==True:
+                nb=False
+                nw=False
+                aS=False
+                ws=False
+            if swordsprite.collidepoint(event.pos) and line2==True:
+                ab=False
+                aw=False 
+                ns=False 
+                ws=False   
+            if swordsprite.collidepoint(event.pos) and line3==True:
+                wb=False
+                ww=False
+                aS=False
+                ns=False
+
+            if bowsprite.collidepoint(event.pos) and line1==True:
+                ns=False
+                nw=False
+                ab=False
+                wb=False
+            if bowsprite.collidepoint(event.pos) and line2==True:
+                aS=False
+                aw=False
+                nb=False
+                wb=False
+            if bowsprite.collidepoint(event.pos) and line3==True:
+                ws=False
+                ww=False
+                nb=False
+                ab=False
+
+            if staffsprite.collidepoint(event.pos) and line1==True:
+                ns=False
+                nb=False
+                aw=False
+                ww=False
+            if staffsprite.collidepoint(event.pos) and line2==True:
+                aS=False
+                ab=False
+                nw=False
+                ww=False
+            if staffsprite.collidepoint(event.pos) and line3==True:
+                ws=False
+                wb=False
+                nw=False
+                aw=False
+
+   # 
+   #                 
+            
     screen.fill('blue')
+    if line1==True:
+        if ns:
+            pygame.draw.line(screen,'Black',(ninjasprite.centerx,ninjasprite.centery),(swordsprite.centerx,swordsprite.centery),5)
+        if nb:
+            pygame.draw.line(screen,'Black',(ninjasprite.centerx,ninjasprite.centery),(bowsprite.centerx,bowsprite.centery),5)
+        if nw:
+            pygame.draw.line(screen,'Black',(ninjasprite.centerx,ninjasprite.centery),(staffsprite.centerx,staffsprite.centery),5)
+    if line2==True:
+        if aS:
+            pygame.draw.line(screen,'Black',(archersprite.centerx,archersprite.centery),(swordsprite.centerx,swordsprite.centery),5)
+        if ab:
+            pygame.draw.line(screen,'Black',(archersprite.centerx,archersprite.centery),(bowsprite.centerx,bowsprite.centery),5)
+        if aw:
+            pygame.draw.line(screen,'Black',(archersprite.centerx,archersprite.centery),(staffsprite.centerx,staffsprite.centery),5)
+    if line3==True:
+        if ws:
+            pygame.draw.line(screen,'Black',(wizardsprite.centerx,wizardsprite.centery),(swordsprite.centerx,swordsprite.centery),5)
+        if wb:
+            pygame.draw.line(screen,'Black',(wizardsprite.centerx,wizardsprite.centery),(bowsprite.centerx,bowsprite.centery),5)
+        if ww:
+            pygame.draw.line(screen,'Black',(wizardsprite.centerx,wizardsprite.centery),(staffsprite.centerx,staffsprite.centery),5)
 
     screen.blit(ninja,ninjasprite)
     screen.blit(archer,archersprite)
