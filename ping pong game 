@@ -1,0 +1,49 @@
+import pygame 
+pygame.init()
+screen =pygame.display.set_mode((800,800))
+pygame.display.set_caption ("ping pong")
+running = True
+redbat=pygame.image.load("red_ping_pong_bat_-removebg-preview.png")
+redbat = pygame.transform.scale(redbat, (100, 100))
+redbatsprite=redbat.get_rect()
+bluebat=pygame.image.load("blue_ping_pong_bat_-removebg-preview.png")
+bluebat = pygame.transform.scale(bluebat, (100, 100))
+redbatsprite.center = (50,500)
+bluebatsprite=bluebat.get_rect()
+bluebatsprite.center = (750,500)
+ball=pygame.image.load("ping_pong_ball-removebg-preview.png")
+ball = pygame.transform.scale(ball, (30, 30))
+ballsprite=ball.get_rect()
+ballsprite.center = (400,400)
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        redbatsprite.y -= 5
+    if keys[pygame.K_s]:
+        redbatsprite.y += 5
+    if keys[pygame.K_a] and redbatsprite.x > 40:
+        redbatsprite.x -= 5
+    if keys[pygame.K_d] and redbatsprite.x < 360:
+        redbatsprite.x += 5
+    if keys[pygame.K_UP]:
+        bluebatsprite.y -= 5    
+    if keys[pygame.K_DOWN]:
+        bluebatsprite.y += 5
+    if keys[pygame.K_LEFT] and bluebatsprite.x > 440:
+        bluebatsprite.x -= 5
+    if keys[pygame.K_RIGHT] and bluebatsprite.x < 760:
+        bluebatsprite.x += 5
+
+
+
+    screen.fill(('yellow'))
+    screen.blit(redbat, redbatsprite)
+    screen.blit(bluebat, bluebatsprite)
+    screen.blit(ball, ballsprite)
+    pygame.draw.line(screen, ('black'), (400,0), (400,800), 3)
+    pygame.display.update()
+pygame.quit()
+
