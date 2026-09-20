@@ -14,8 +14,47 @@ bluebatsprite.center = (750,500)
 ball=pygame.image.load("ping_pong_ball-removebg-preview.png")
 ball = pygame.transform.scale(ball, (30, 30))
 ballsprite=ball.get_rect()
-ballsprite.center = (400,400)
-while running:
+
+front1=pygame.font.SysFont('Arial',25)
+text1=front1.render('red player score: 0',True,'black')
+font2=pygame.font.SysFont('Arial',25)
+text2=font2.render('blue player score: 0',True,'black')
+redscore=0
+bluescore=0
+dx=-0.7
+dy=0.7                                  
+bx=400                                  
+by=400                                  
+ballsprite.center = (bx,by)                                 
+
+
+
+while running:                                  
+    bx += dx                                    
+    by += dy                                    
+    if by<0:                                    
+        dy=dy*-1                                    
+    if by>800:                                  
+        dy=dy*-1                                    
+    if ballsprite.colliderect(redbatsprite) or ballsprite.colliderect(bluebatsprite):                                   
+        dx=dx*-1                                    
+    if bx<0:                                    
+        bluescore += 1                                  
+        text2=font2.render('blue player score: '+str(bluescore),True,'black')                                   
+        bx=400    
+                                      
+        by=400                                  
+                                 
+        dy=0.7                                  
+    if bx>800:                                  
+        redscore += 1                                   
+        text1=front1.render('red player score: '+str(redscore),True,'black')                                    
+        bx=400                                  
+        by=400                                  
+                                      
+        dy=0.7
+    
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -24,25 +63,40 @@ while running:
         redbatsprite.y -= 5
     if keys[pygame.K_s]:
         redbatsprite.y += 5
-    if keys[pygame.K_a] and redbatsprite.x > 40:
+    if keys[pygame.K_a] and redbatsprite.x > -25:
         redbatsprite.x -= 5
-    if keys[pygame.K_d] and redbatsprite.x < 360:
+    if keys[pygame.K_d] and redbatsprite.x < 350:
         redbatsprite.x += 5
     if keys[pygame.K_UP]:
         bluebatsprite.y -= 5    
     if keys[pygame.K_DOWN]:
         bluebatsprite.y += 5
-    if keys[pygame.K_LEFT] and bluebatsprite.x > 440:
+    if keys[pygame.K_LEFT] and bluebatsprite.x > 400:
         bluebatsprite.x -= 5
-    if keys[pygame.K_RIGHT] and bluebatsprite.x < 760:
+    if keys[pygame.K_RIGHT] and bluebatsprite.x < 780:
         bluebatsprite.x += 5
 
 
 
     screen.fill(('yellow'))
+
+    pygame.draw.rect(screen, "white", (150, 20, 200, 70))
+    pygame.draw.rect(screen, "white", (450, 20, 200, 70))
+
+   
+
+
+
+  
+    
+    
+    
+    ballsprite.center = (bx,by)
     screen.blit(redbat, redbatsprite)
     screen.blit(bluebat, bluebatsprite)
     screen.blit(ball, ballsprite)
+    screen.blit(text1, (100, 20))
+    screen.blit(text2, (500, 20))
     pygame.draw.line(screen, ('black'), (400,0), (400,800), 3)
     pygame.display.update()
 pygame.quit()
