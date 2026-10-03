@@ -2,11 +2,14 @@
 import pygame
 import random
 pygame.init()
+pygame.mixer.init()
 
 screen = pygame.display.set_mode((800, 800))
 pygame.display.set_caption("Car Racing Game")
 clock = pygame.time.Clock()
 font = pygame.font.Font(None, 30)
+loose_sound=pygame.mixer.music.load("GAMEOVER.mp3")
+
 
 obstcal2_image = pygame.image.load("acone-removebg-preview.png").convert_alpha()
 obstcal2_image = pygame.transform.scale(obstcal2_image, (60, 100))
@@ -85,6 +88,7 @@ while running:
 
     if car.colliderect(obstaclsprite2) or car.colliderect(obstaclesprite) or car.colliderect(obstaclsprite3) or car.colliderect(obstaclesprite4):
         text = font.render("Game Over! Final Score: " + str(score), True, (255, 0, 0))
+        pygame.mixer.music.play(1)
         screen.blit(text, (200, 400))
         pygame.display.update()
         pygame.time.delay(3000)
